@@ -1,4 +1,4 @@
-#Zelda BOTW Item Tracker App
+# Zelda BOTW Item Tracker App
 
 This app displays all Zelda Breath of The Wild items. Users are able to select different categories of items and view them in a user-friendly, card-based format. Each card provides essential information about the item.
 
