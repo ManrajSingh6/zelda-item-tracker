@@ -1,0 +1,56 @@
+import React from "react";
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { CardMedia } from '@mui/material';
+import { useState } from 'react';
+
+function MonsterTreasureCard(props){
+
+    // State management for flipping a card
+    const [isFlipped, setFlipped] = useState(false);
+
+    const itemDropStyle = {
+      textTransform: "Capitalize"
+    }
+
+    // Return front-face or back-face depending on isFlipped state
+    return (
+        <Card sx={{ width: 280, height: 450, borderRadius: 3, boxShadow: 4}}>
+          <CardActionArea style={{width: 280, height: 460}} onClick={() => setFlipped(!isFlipped)}>
+          {
+            isFlipped ? (null) : (
+              <CardMedia
+                sx={{objectFit: "cover"}}
+                component="img"
+                image={props.cImageURL}
+                title="Item Image"
+                height="280"
+              />
+            )
+          }
+          
+          {
+            isFlipped ? (
+              <CardContent>
+                <Typography fontFamily="Signika Negative" variant="h6">{props.cName}</Typography>
+                <Typography fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p" style={{marginBottom: "15px", marginTop: "15px"}}>
+                  {props.cDesc}
+                </Typography>
+                <Typography fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p"><strong>Common Locations: </strong>{props.commonLoc}</Typography>
+                <Typography style={itemDropStyle} fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p" sx={{marginTop: "15px"}}><strong>Item Drops: </strong>{props.itemDrops}</Typography>
+              </CardContent>
+            ) : (
+              <CardContent style={{overflow: "hidden", textOverflow: 'ellipsis', paddingBottom: "10px", marginBottom: "15px"}}>
+                <Typography fontFamily="Signika Negative" gutterBottom variant="h6" component="h2">{props.cName}</Typography>
+                <Typography fontFamily="Signika Negative" gutterBottom variant="body2" component="p">Item ID: {props.cID}</Typography>
+              </CardContent>
+            )
+          }
+          </CardActionArea>
+        </Card>
+      );
+}
+
+export default MonsterTreasureCard;

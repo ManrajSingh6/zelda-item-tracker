@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Signika Negative', sans-serif;
+}
+
+body{
+    background: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 8vh;
+    background: #04003b;
+    color: #fff;
+    box-shadow: 0 2px 5px rgb(37, 37, 37);
+}
+
+.nav-brand{
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.nav-brand:hover{
+    color: rgb(0, 217, 255);
+    text-decoration: underline;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
+.nav-item{
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.nav-item:hover{
+    color: rgb(0, 217, 255);
+    text-decoration: underline;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3rem;
+}
+
+.nav-toggler div{
+    width: 2.5rem;
+    height: 0.2rem;
+    margin: 0.4rem;
+    background: #fff;
+}
+
+.nav-toggler{
+    cursor: pointer;
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .nav-toggler{
+        display: block;
+    }
+
+    .nav-menu{
+        position: fixed;
+        top: 7vh;
+        right: 0;
+        width: 50%;
+        height: 93vh;
+        background:rgb(0, 28, 73);
+        flex-direction: column;
+        transform: translateX(100%);
+    }
+}
+
+/* Nav Active Class */
+
+.nav-active{
+    transform: translateX(0);
+}
+
+.form-div{
+    margin: 20px auto 20px auto;
+    text-align: center;
+    width: 70%;
+    /* background: red; */
+    padding: 10px;
+}
+
+.search-bar{
+    position: relative;
+    height: 2.5rem;
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    font-family:'Signika Negative', sans-serif;
+    border-radius: 10px;
+    margin-right: 15px;
+    bottom: 5px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(37, 37, 37, 0.562);
+}
+
+.submit-btn{
+    height: 2.7rem;
+    width: 12.7rem;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(37, 37, 37, 0.562);
+    cursor: pointer;
+}
+
+footer{
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 20px;
+}
+
+footer h4{
+    color: #04003b;
+    font-weight: 400;
+}
+
+.grid-container{
+    /* padding: 100px; */
+    /* background: red; */
+}
