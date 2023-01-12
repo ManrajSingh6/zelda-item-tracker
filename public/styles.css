@@ -78,9 +78,10 @@ li{
         right: 0;
         width: 50%;
         height: 93vh;
-        background:rgb(0, 28, 73);
+        background: #04003b;
         flex-direction: column;
         transform: translateX(100%);
+        z-index: 1;
     }
 }
 
@@ -94,7 +95,6 @@ li{
     margin: 20px auto 20px auto;
     text-align: center;
     width: 70%;
-    /* background: red; */
     padding: 10px;
 }
 
@@ -133,9 +133,4 @@ footer{
 footer h4{
     color: #04003b;
     font-weight: 400;
-}
-
-.grid-container{
-    /* padding: 100px; */
-    /* background: red; */
 }

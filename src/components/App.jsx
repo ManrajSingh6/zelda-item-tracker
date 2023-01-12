@@ -11,6 +11,7 @@ import MonsterTreasureCard from './MonsterTreasureCard';
 import EquipmentCard from './EquipmentCard';
 import MaterialsCard from './MaterialsCard';
 import CreaturesCard from './CreaturesCard';
+import ItemSelectButtons from './ItemSelectButtons';
 
 // Styling for the pre loader
 const preLoaderStyle = {
@@ -26,6 +27,8 @@ function App(){
     const[data, setData] = useState(null);
     const[globalCategory, setCategory] = useState("monsters"); 
     const[creatureType, setCreatureType] = useState("food");
+    const[searchTerm, setSearchTerm] = useState("");
+    const[itemCount, setItemCount] = useState(12);
 
     // Use the useEffect() hook and fetch API to make an API call and get a response - used for initial loading
     useEffect(() => {
@@ -43,6 +46,12 @@ function App(){
         const data = await res.json();
         setData(data);
         setCategory(category);
+        setSearchTerm("");
+    }
+
+    // Method to make an API call to get a specific item based on item Name or item ID (itemTag can be both ID or Name)
+    function queryItems(itemTag) {
+        setSearchTerm(itemTag);
     }
 
     // While the data is loading, display a preloader
@@ -67,12 +76,23 @@ function App(){
             return (name.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
         }
     }
+
+    // Function that updates the number of items displayed
+    function changeItemsToDisplay(itemCount){
+        setItemCount(itemCount);
+    }
     
     //Provide different props to cards depending on card type
     function getValueChoices(){
         if (globalCategory === "monsters" || globalCategory === "treasure"){
             return(
-                data.data.map((card) => (
+                data.data.filter((val, num) => {
+                    if (searchTerm === ""){
+                        return val;
+                    } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                        return val;
+                    }
+                }).slice(0, itemCount).map((card) => (
                     <Grid item key={uniqid()} >
                         <MonsterTreasureCard 
                             key={uniqid()} 
@@ -89,7 +109,13 @@ function App(){
             );
         } else if (globalCategory === "equipment"){
             return(
-                data.data.map((card) => (
+                data.data.filter((val) => {
+                    if (searchTerm === ""){
+                        return val;
+                    } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                        return val;
+                    }
+                }).slice(0, itemCount).map((card) => (
                     <Grid item key={uniqid()} >
                         <EquipmentCard 
                             key={uniqid()}  
@@ -107,7 +133,13 @@ function App(){
             );
         } else if (globalCategory === "materials"){
             return(
-                data.data.map((card) => (
+                data.data.filter((val) => {
+                    if (searchTerm === ""){
+                        return val;
+                    } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                        return val;
+                    }
+                }).slice(0, itemCount).map((card) => (
                     <Grid item key={uniqid()} >
                         <MaterialsCard 
                             key={uniqid()} 
@@ -126,7 +158,13 @@ function App(){
         } else if (globalCategory === "creatures"){
             if (creatureType === "food"){
                 return(
-                    data.data.food.map((card) => (
+                    data.data.food.filter((val) => {
+                        if (searchTerm === ""){
+                            return val;
+                        } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return val;
+                        }
+                    }).slice(0, itemCount).map((card) => (
                         <Grid item key={uniqid()} >
                             <CreaturesCard 
                                 key={uniqid()} 
@@ -145,7 +183,13 @@ function App(){
                 );
             } else {
                 return(
-                    data.data.non_food.map((card) => (
+                    data.data.non_food.filter((val) => {
+                        if (searchTerm === ""){
+                            return val;
+                        } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return val;
+                        }
+                    }).slice(0, itemCount).map((card) => (
                         <Grid item key={uniqid()} >
                             <CreaturesCard 
                                 key={uniqid()} 
@@ -167,11 +211,17 @@ function App(){
 
     }
 
+    // Return App components
     return(
         <div>
             <Header updateDisplay={changeCategory} currentCategory={globalCategory} updateCType={setCreatureType}/>
-            <SearchBar />
-            <Grid key={uniqid()}  container spacing={4} className="grid-container" sx={{justifyContent: "center", padding: "10px", marginBottom: "30px"}}>            
+            <SearchBar makeQuery={queryItems} itemCategory={globalCategory}/>
+            <ItemSelectButtons style={{marginBottom: "100px"}} changeDisplayItems={changeItemsToDisplay}/>
+            <Grid 
+                key={uniqid()} 
+                container spacing={4} 
+                className="grid-container" 
+                sx={{justifyContent: "center", padding: "10px", marginBottom: "30px"}}>            
                 {getValueChoices()}
             </Grid>
             <Footer />

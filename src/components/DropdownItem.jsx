@@ -10,7 +10,7 @@ const styles = {
     fontSize: '1rem'
 }
 
-// The following DropdownItem code was adapted from the Material-UI website
+// Adapted from Material UI website
 
 function DropdownItem(props) {
 

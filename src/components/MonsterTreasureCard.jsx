@@ -35,7 +35,7 @@ function MonsterTreasureCard(props){
             isFlipped ? (
               <CardContent>
                 <Typography fontFamily="Signika Negative" variant="h6">{props.cName}</Typography>
-                <Typography fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p" style={{marginBottom: "15px", marginTop: "15px"}}>
+                <Typography fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p" style={{marginBottom: "15px"}}>
                   {props.cDesc}
                 </Typography>
                 <Typography fontFamily="Signika Negative" variant="body2" color="textSecondary" component="p"><strong>Common Locations: </strong>{props.commonLoc}</Typography>
