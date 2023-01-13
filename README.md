@@ -6,4 +6,4 @@ All item information is retrieved using the Hyrule Compendium API linked [here.]
 
 This was made to practice React development and uses the Material-UI framework for some components. 
 
-It is currently a work-in-progress, and will be deployed soon.
+View the project [here.](https://manrajsingh6.github.io/zelda-item-tracker/)
