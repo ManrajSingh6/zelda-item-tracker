@@ -1,12 +1,10 @@
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
 async function startServer(): Promise<void> {
-  dotenv.config()
-
   const server = new ApolloServer({
-    typeDefs: '',
+    typeDefs: `type Query { bookIds: [Int!]!}`,
     resolvers: {},
   })
 
