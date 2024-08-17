@@ -1,0 +1,81 @@
+{
+  "env": {
+    "browser": false,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "jest", "functional"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "camelcase": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+        "filter": {
+          "regex": "^(show_inactive_rates|show_all_custom_rates|include_inactive_nem_programs|current_nem_program_id|master_rate_schedule_id|rate_schedule_id|effective_date|site_id|import_limit|export_limit|max_limit_w_percentage|end_time|start_time|stop_time|active_power|user_id|utility_id|event_id|source_id|receipt_id|command_space_id|start_timestamp|stop_timestamp|min_soc|max_soc|target_soc|avoid_increased_demand_charges|power_pct|soc_margin|company_id|special_program|administering_company_id|created_timestamp|solar_technology|ess_technology|end_timestamp|wireguard_ip|public_key|peer_hostname|peer_port|peer_public_key|peer_allowed_ips|_{1,2}([^_]+))$",
+          "match": false
+        }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowHigherOrderFunctions": true
+      }
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array-simple",
+        "readonly": "array-simple"
+      }
+    ],
+    "@typescript-eslint/await-thenable": ["error"],
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": false
+      }
+    ],
+    "@typescript-eslint/no-for-in-array": ["error"],
+    "no-magic-numbers": "off",
+    "@typescript-eslint/no-magic-numbers": [
+      "error",
+      { "ignoreNumericLiteralTypes": true }
+    ],
+    "@typescript-eslint/no-require-imports": ["error"],
+    "require-await": "off",
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/prefer-includes": "error",
+    "functional/immutable-data": "error",
+    "functional/no-let": "error",
+    "functional/prefer-readonly-type": "error",
+    "curly": "error"
+  }
+}
