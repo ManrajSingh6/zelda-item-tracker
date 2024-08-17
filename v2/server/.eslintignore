@@ -1,2 +1,3 @@
 .vscode/
 build/
+src/graphql/gen/gen-types.d.ts

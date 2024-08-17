@@ -1,1 +1,2 @@
 .env
+src/graphql/gen/gen-types.d.ts

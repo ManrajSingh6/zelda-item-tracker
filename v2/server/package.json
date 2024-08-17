@@ -10,7 +10,8 @@
     "dev": "tsx watch src/index.ts",
     "start": "node ./build/index.js",
     "prettier": "prettier --write src/",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "generate": "graphql-codegen"
   },
   "author": "Manraj Singh",
   "type": "module",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@graphql-codegen/cli": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
     "eslint": "^8.57.0",

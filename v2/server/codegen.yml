@@ -1,0 +1,22 @@
+schema:
+  - ./src/graphql/schema.ts
+generates:
+  ./src/graphql/gen/gen-types.d.ts:
+    plugins:
+      - typescript
+    config:
+      maybeValue: T | undefined | null
+      immutableTypes: true
+      flattenGeneratedTypes: false
+      noExport: false
+      preResolveTypes: true
+      dedupeOperationSuffix: false
+      omitOperationSuffix: false
+      exportFragmentSpreadSubTypes: false
+      enumPrefix: true
+      wrapFieldDefinitions: true
+      onlyOperationTypes: false
+      skipTypename: false
+      nonOptionalTypename: false
+      useImplementingTypes: false
+      enumsAsTypes: true
