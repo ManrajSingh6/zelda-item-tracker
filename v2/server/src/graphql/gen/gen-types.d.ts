@@ -15,11 +15,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Book = {
-  readonly __typename?: 'Book';
-  readonly id: FieldWrapper<Scalars['Int']['output']>;
-};
-
 export type Category =
   | 'Creatures'
   | 'Equipment'

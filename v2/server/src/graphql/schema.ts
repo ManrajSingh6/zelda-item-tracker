@@ -3,10 +3,6 @@ import gql from 'graphql-tag'
 // REST API schema: https://gadhagod.github.io/Hyrule-Compendium-API/#/compendium-api?id=entry-schemas
 
 export const schema = gql`
-  type Book {
-    id: Int!
-  }
-
   type Query {
     monsters: [Monster!]!
     equipment: [Equipment!]!
