@@ -1,0 +1,32 @@
+schema:
+  - ./src/graphql/schema.graphql
+generates:
+  ./src/graphql/gen/gen-types.d.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      namingConvention:
+        transformUnderscore: true
+      immutableTypes: true
+      flattenGeneratedTypes: false
+      noExport: false
+      preResolveTypes: true
+      dedupeOperationSuffix: false
+      omitOperationSuffix: false
+      exportFragmentSpreadSubTypes: true
+      enumPrefix: true
+      wrapFieldDefinitions: true
+      onlyOperationTypes: false
+      skipTypename: false
+      nonOptionalTypename: false
+      useImplementingTypes: true
+      maybeValue: T | null | undefined
+      avoidOptionals:
+        field: true
+        inputValue: false
+        object: true
+        defaultValue: false
+hooks:
+  afterAllFileWrite:
+    - prettier --write src/graphql/gen/gen-types.d.ts
