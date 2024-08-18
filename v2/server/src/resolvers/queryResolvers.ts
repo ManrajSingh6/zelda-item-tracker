@@ -1,11 +1,18 @@
 import { GraphQLError } from 'graphql'
 import { SuperAgentStatic } from 'superagent'
-import { Equipment, Material, Monster } from '../graphql/gen/gen-types'
+import {
+  Creature,
+  Equipment,
+  Material,
+  Monster,
+  QueryCreaturesArgs,
+} from '../graphql/gen/gen-types'
 import { HYRULE_API_VERSION } from '../utils/constants'
 import { MonsterApiResponse } from '../types/monsterTypes'
 import { QueryCategoryApiResponse } from '../types/queryTypes'
 import { EquipmentApiResponse } from '../types/equipmentTypes'
 import { MaterialApiResponse } from '../types/materialTypes'
+import { CreatureApiResponse } from '../types/creaturesTypes'
 
 const CATEGORY_ENDPOINT = 'compendium/category'
 
@@ -30,6 +37,11 @@ export interface QueryResolvers {
     args: unknown,
     context: unknown,
   ) => Promise<readonly Material[] | GraphQLError>
+  readonly creatures: (
+    parent: unknown,
+    args: QueryCreaturesArgs,
+    context: unknown,
+  ) => Promise<readonly Creature[] | GraphQLError>
 }
 
 export function createQueryResolvers({
@@ -108,19 +120,18 @@ export function createQueryResolvers({
         await fetcher.get(`${formattedCategoryEndpoint}/materials`)
       ).body
 
-      return response.data.map((apiEquipment) => ({
-        id: apiEquipment.id,
-        name: apiEquipment.name,
+      return response.data.map((apiMaterial) => ({
+        id: apiMaterial.id,
+        name: apiMaterial.name,
         category: 'Materials',
-        description: apiEquipment.description,
-        image: apiEquipment.image,
-        commonLocations: apiEquipment.common_locations ?? [],
-        heartsRecovered: apiEquipment.hearts_recovered,
+        description: apiMaterial.description,
+        image: apiMaterial.image,
+        commonLocations: apiMaterial.common_locations ?? [],
+        heartsRecovered: apiMaterial.hearts_recovered,
+        fuseAttackPower: apiMaterial.fuse_attack_power,
         cookingEffect:
-          apiEquipment.cooking_effect !== ''
-            ? apiEquipment.cooking_effect
-            : null,
-        isDlc: apiEquipment.dlc,
+          apiMaterial.cooking_effect !== '' ? apiMaterial.cooking_effect : null,
+        isDlc: apiMaterial.dlc,
       }))
     } catch (error) {
       console.error(`Error fetching materials, error=${JSON.stringify(error)}`)
@@ -128,5 +139,45 @@ export function createQueryResolvers({
     }
   }
 
-  return Object.freeze({ monsters, equipment, materials })
+  async function creatures(
+    _parent: unknown,
+    { filters }: QueryCreaturesArgs,
+    _context: unknown,
+  ): Promise<readonly Creature[] | GraphQLError> {
+    try {
+      const response: QueryCategoryApiResponse<CreatureApiResponse> = (
+        await fetcher.get(`${formattedCategoryEndpoint}/creatures`)
+      ).body
+
+      const { isEdible } = filters ?? {}
+
+      const transformedResponse: readonly Creature[] = response.data.map(
+        (apiCreature) => ({
+          id: apiCreature.id,
+          name: apiCreature.name,
+          category: 'Creatures',
+          description: apiCreature.description,
+          image: apiCreature.image,
+          commonLocations: apiCreature.common_locations ?? [],
+          heartsRecovered: apiCreature.hearts_recovered ?? null,
+          cookingEffect:
+            apiCreature.cooking_effect !== ''
+              ? apiCreature.cooking_effect
+              : null,
+          isDlc: apiCreature.dlc,
+          isEdible: apiCreature.edible,
+          drops: apiCreature.drops ?? [],
+        }),
+      )
+
+      return isEdible != undefined
+        ? transformedResponse.filter((c) => c.isEdible === isEdible)
+        : transformedResponse
+    } catch (error) {
+      console.error(`Error fetching creatures, error=${JSON.stringify(error)}`)
+      return new GraphQLError('Error fetching creatures.')
+    }
+  }
+
+  return Object.freeze({ monsters, equipment, materials, creatures })
 }

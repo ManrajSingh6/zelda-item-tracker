@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export interface MaterialApiResponse {
+export interface CreatureApiResponse {
   readonly id: number
   readonly name: string
   readonly category: string
   readonly description: string
   readonly image: string
   readonly common_locations: readonly string[] | null
-  readonly hearts_recovered: number
   readonly cooking_effect: string
-  readonly fuse_attack_power: number | null
+  readonly edible: boolean
+  readonly hearts_recovered: number | undefined
   readonly dlc: boolean
+  readonly drops: readonly string[] | null | undefined
 }
