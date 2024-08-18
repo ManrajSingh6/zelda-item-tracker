@@ -1,10 +1,11 @@
 import { GraphQLError } from 'graphql'
 import { SuperAgentStatic } from 'superagent'
-import { Equipment, Monster } from '../graphql/gen/gen-types'
+import { Equipment, Material, Monster } from '../graphql/gen/gen-types'
 import { HYRULE_API_VERSION } from '../utils/constants'
 import { MonsterApiResponse } from '../types/monsterTypes'
 import { QueryCategoryApiResponse } from '../types/queryTypes'
 import { EquipmentApiResponse } from '../types/equipmentTypes'
+import { MaterialApiResponse } from '../types/materialTypes'
 
 const CATEGORY_ENDPOINT = 'compendium/category'
 
@@ -24,6 +25,11 @@ export interface QueryResolvers {
     args: unknown,
     context: unknown,
   ) => Promise<readonly Equipment[] | GraphQLError>
+  readonly materials: (
+    parent: unknown,
+    args: unknown,
+    context: unknown,
+  ) => Promise<readonly Material[] | GraphQLError>
 }
 
 export function createQueryResolvers({
@@ -92,5 +98,35 @@ export function createQueryResolvers({
     }
   }
 
-  return Object.freeze({ monsters, equipment })
+  async function materials(
+    _parent: unknown,
+    _args: unknown,
+    _context: unknown,
+  ): Promise<readonly Material[] | GraphQLError> {
+    try {
+      const response: QueryCategoryApiResponse<MaterialApiResponse> = (
+        await fetcher.get(`${formattedCategoryEndpoint}/materials`)
+      ).body
+
+      return response.data.map((apiEquipment) => ({
+        id: apiEquipment.id,
+        name: apiEquipment.name,
+        category: 'Materials',
+        description: apiEquipment.description,
+        image: apiEquipment.image,
+        commonLocations: apiEquipment.common_locations ?? [],
+        heartsRecovered: apiEquipment.hearts_recovered,
+        cookingEffect:
+          apiEquipment.cooking_effect !== ''
+            ? apiEquipment.cooking_effect
+            : null,
+        isDlc: apiEquipment.dlc,
+      }))
+    } catch (error) {
+      console.error(`Error fetching materials, error=${JSON.stringify(error)}`)
+      return new GraphQLError('Error fetching materials.')
+    }
+  }
+
+  return Object.freeze({ monsters, equipment, materials })
 }
