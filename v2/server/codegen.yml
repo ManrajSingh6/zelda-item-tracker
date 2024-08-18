@@ -20,3 +20,4 @@ generates:
       nonOptionalTypename: false
       useImplementingTypes: false
       enumsAsTypes: true
+      avoidOptionals: true

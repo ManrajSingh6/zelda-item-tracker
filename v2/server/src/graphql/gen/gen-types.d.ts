@@ -31,10 +31,10 @@ export type Creature = {
   readonly __typename?: 'Creature';
   readonly category: FieldWrapper<Category>;
   readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
-  readonly cookingEffect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
+  readonly cookingEffect: Maybe<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
   readonly drops: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
-  readonly heartsRecovered?: Maybe<FieldWrapper<Scalars['Float']['output']>>;
+  readonly heartsRecovered: Maybe<FieldWrapper<Scalars['Float']['output']>>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
   readonly isDlc: FieldWrapper<Scalars['Boolean']['output']>;
@@ -43,7 +43,7 @@ export type Creature = {
 };
 
 export type CreatureFilters = {
-  readonly isEdible?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly isEdible: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Equipment = {
@@ -60,19 +60,19 @@ export type Equipment = {
 
 export type EquipmentProperty = {
   readonly __typename?: 'EquipmentProperty';
-  readonly attackDamage?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
-  readonly defense?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
-  readonly effect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
-  readonly type?: Maybe<FieldWrapper<Scalars['String']['output']>>;
+  readonly attackDamage: Maybe<FieldWrapper<Scalars['Int']['output']>>;
+  readonly defense: Maybe<FieldWrapper<Scalars['Int']['output']>>;
+  readonly effect: Maybe<FieldWrapper<Scalars['String']['output']>>;
+  readonly type: Maybe<FieldWrapper<Scalars['String']['output']>>;
 };
 
 export type Material = {
   readonly __typename?: 'Material';
   readonly category: FieldWrapper<Category>;
   readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
-  readonly cookingEffect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
+  readonly cookingEffect: Maybe<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
-  readonly fuseAttackPower?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
+  readonly fuseAttackPower: Maybe<FieldWrapper<Scalars['Int']['output']>>;
   readonly heartsRecovered: FieldWrapper<Scalars['Float']['output']>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
@@ -103,7 +103,7 @@ export type Query = {
 
 
 export type QueryCreaturesArgs = {
-  filters?: InputMaybe<CreatureFilters>;
+  filters: InputMaybe<CreatureFilters>;
 };
 
 export type Treasure = {
