@@ -1,10 +1,12 @@
 import { GraphQLError } from 'graphql'
 import { SuperAgentStatic } from 'superagent'
-import { Monster } from '../graphql/gen/gen-types'
+import { Equipment, Monster } from '../graphql/gen/gen-types'
 import { HYRULE_API_VERSION } from '../utils/constants'
-import { QueryMonstersApiResponse } from '../types/monsterTypes'
+import { MonsterApiResponse } from '../types/monsterTypes'
+import { QueryCategoryApiResponse } from '../types/queryTypes'
+import { EquipmentApiResponse } from '../types/equipmentTypes'
 
-const MONSTERS_ENDPOINT = 'compendium/category/monsters'
+const CATEGORY_ENDPOINT = 'compendium/category'
 
 interface QueryResolverOpts {
   readonly fetcher: SuperAgentStatic
@@ -17,6 +19,11 @@ export interface QueryResolvers {
     args: unknown,
     context: unknown,
   ) => Promise<readonly Monster[] | GraphQLError>
+  readonly equipment: (
+    parent: unknown,
+    args: unknown,
+    context: unknown,
+  ) => Promise<readonly Equipment[] | GraphQLError>
 }
 
 export function createQueryResolvers({
@@ -29,9 +36,9 @@ export function createQueryResolvers({
     _context: unknown,
   ): Promise<readonly Monster[] | GraphQLError> {
     try {
-      const response: QueryMonstersApiResponse = (
+      const response: QueryCategoryApiResponse<MonsterApiResponse> = (
         await fetcher.get(
-          `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${MONSTERS_ENDPOINT}`,
+          `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${CATEGORY_ENDPOINT}/monsters`,
         )
       ).body
 
@@ -53,5 +60,43 @@ export function createQueryResolvers({
     }
   }
 
-  return Object.freeze({ monsters })
+  async function equipment(
+    _parent: unknown,
+    _args: unknown,
+    _context: unknown,
+  ): Promise<readonly Equipment[] | GraphQLError> {
+    try {
+      const response: QueryCategoryApiResponse<EquipmentApiResponse> = (
+        await fetcher.get(
+          `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${CATEGORY_ENDPOINT}/equipment`,
+        )
+      ).body
+
+      return response.data.map((apiEquipment) => {
+        return {
+          id: apiEquipment.id,
+          name: apiEquipment.name,
+          category: 'Equipment',
+          description: apiEquipment.description,
+          image: apiEquipment.image,
+          commonLocations: apiEquipment.common_locations ?? [],
+          properties: {
+            attackDamage: apiEquipment.properties.attack,
+            defense: apiEquipment.properties.defense,
+            effect:
+              apiEquipment.properties.effect !== ''
+                ? apiEquipment.properties.effect
+                : null,
+            type: apiEquipment.properties.type,
+          },
+          isDlc: apiEquipment.dlc,
+        }
+      })
+    } catch (error) {
+      console.error(`Error fetching equipment, error=${JSON.stringify(error)}`)
+      return new GraphQLError('Error fetching equipment.')
+    }
+  }
+
+  return Object.freeze({ monsters, equipment })
 }
