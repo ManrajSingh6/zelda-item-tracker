@@ -6,6 +6,7 @@ import {
   Material,
   Monster,
   QueryCreaturesArgs,
+  Treasure,
 } from '../graphql/gen/gen-types'
 import { HYRULE_API_VERSION } from '../utils/constants'
 import { MonsterApiResponse } from '../types/monsterTypes'
@@ -13,6 +14,7 @@ import { QueryCategoryApiResponse } from '../types/queryTypes'
 import { EquipmentApiResponse } from '../types/equipmentTypes'
 import { MaterialApiResponse } from '../types/materialTypes'
 import { CreatureApiResponse } from '../types/creaturesTypes'
+import { TreasureApiResponse } from '../types/treasureTypes'
 
 const CATEGORY_ENDPOINT = 'compendium/category'
 
@@ -42,6 +44,11 @@ export interface QueryResolvers {
     args: QueryCreaturesArgs,
     context: unknown,
   ) => Promise<readonly Creature[] | GraphQLError>
+  readonly treasure: (
+    parent: unknown,
+    args: unknown,
+    context: unknown,
+  ) => Promise<readonly Treasure[] | GraphQLError>
 }
 
 export function createQueryResolvers({
@@ -179,5 +186,31 @@ export function createQueryResolvers({
     }
   }
 
-  return Object.freeze({ monsters, equipment, materials, creatures })
+  async function treasure(
+    _parent: unknown,
+    _args: unknown,
+    _context: unknown,
+  ): Promise<readonly Treasure[] | GraphQLError> {
+    try {
+      const response: QueryCategoryApiResponse<TreasureApiResponse> = (
+        await fetcher.get(`${formattedCategoryEndpoint}/treasure`)
+      ).body
+
+      return response.data.map((apiTreasure) => ({
+        id: apiTreasure.id,
+        name: apiTreasure.name,
+        category: 'Treasure',
+        description: apiTreasure.description,
+        image: apiTreasure.image,
+        commonLocations: apiTreasure.common_locations ?? [],
+        drops: apiTreasure.drops ?? [],
+        isDlc: apiTreasure.dlc,
+      }))
+    } catch (error) {
+      console.error(`Error fetching treasure, error=${JSON.stringify(error)}`)
+      return new GraphQLError('Error fetching treasure.')
+    }
+  }
+
+  return Object.freeze({ monsters, equipment, materials, creatures, treasure })
 }
