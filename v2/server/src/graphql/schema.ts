@@ -26,8 +26,8 @@ export const schema = gql`
     category: Category!
     description: String!
     image: String!
-    commonLocations: [String!]
-    drops: [String!]
+    commonLocations: [String!]!
+    drops: [String!]!
     isDlc: Boolean!
   }
 
@@ -44,7 +44,7 @@ export const schema = gql`
     category: Category!
     description: String!
     image: String!
-    commonLocations: [String!]
+    commonLocations: [String!]!
     properties: EquipmentProperty!
     isDlc: Boolean!
   }
@@ -55,11 +55,11 @@ export const schema = gql`
     category: Category!
     description: String!
     image: String!
-    commonLocations: [String!]
+    commonLocations: [String!]!
     heartsRecovered: Float!
     cookingEffect: String # Empty string if none
     isDlc: Boolean!
-    fuseAttackPower: Int! # Only for TOTK
+    fuseAttackPower: Int # Only for TOTK
   }
 
   type Creature {
@@ -68,11 +68,11 @@ export const schema = gql`
     category: Category!
     description: String!
     image: String!
-    commonLocations: [String!]
+    commonLocations: [String!]!
     cookingEffect: String # Empty string if none
     isEdible: Boolean! # Always true for creatures
     heartsRecovered: Float # Not null for edible creatures
-    drops: [String!]
+    drops: [String!]!
     isDlc: Boolean!
   }
 
@@ -82,8 +82,8 @@ export const schema = gql`
     category: Category!
     description: String!
     image: String!
-    commonLocations: [String!]
-    drops: [String!]
+    commonLocations: [String!]!
+    drops: [String!]!
     isDlc: Boolean!
   }
 

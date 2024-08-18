@@ -30,10 +30,10 @@ export type Category =
 export type Creature = {
   readonly __typename?: 'Creature';
   readonly category: FieldWrapper<Category>;
-  readonly commonLocations?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly cookingEffect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
-  readonly drops?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly drops: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly heartsRecovered?: Maybe<FieldWrapper<Scalars['Float']['output']>>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
@@ -49,7 +49,7 @@ export type CreatureFilters = {
 export type Equipment = {
   readonly __typename?: 'Equipment';
   readonly category: FieldWrapper<Category>;
-  readonly commonLocations?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
@@ -69,10 +69,10 @@ export type EquipmentProperty = {
 export type Material = {
   readonly __typename?: 'Material';
   readonly category: FieldWrapper<Category>;
-  readonly commonLocations?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly cookingEffect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
-  readonly fuseAttackPower: FieldWrapper<Scalars['Int']['output']>;
+  readonly fuseAttackPower?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
   readonly heartsRecovered: FieldWrapper<Scalars['Float']['output']>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
@@ -83,9 +83,9 @@ export type Material = {
 export type Monster = {
   readonly __typename?: 'Monster';
   readonly category: FieldWrapper<Category>;
-  readonly commonLocations?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
-  readonly drops?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly drops: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
   readonly isDlc: FieldWrapper<Scalars['Boolean']['output']>;
@@ -109,9 +109,9 @@ export type QueryCreaturesArgs = {
 export type Treasure = {
   readonly __typename?: 'Treasure';
   readonly category: FieldWrapper<Category>;
-  readonly commonLocations?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly commonLocations: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly description: FieldWrapper<Scalars['String']['output']>;
-  readonly drops?: Maybe<ReadonlyArray<FieldWrapper<Scalars['String']['output']>>>;
+  readonly drops: ReadonlyArray<FieldWrapper<Scalars['String']['output']>>;
   readonly id: FieldWrapper<Scalars['Int']['output']>;
   readonly image: FieldWrapper<Scalars['String']['output']>;
   readonly isDlc: FieldWrapper<Scalars['Boolean']['output']>;
