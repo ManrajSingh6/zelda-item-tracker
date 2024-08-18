@@ -60,8 +60,8 @@ export type Equipment = {
 
 export type EquipmentProperty = {
   readonly __typename?: 'EquipmentProperty';
-  readonly attackDamage: FieldWrapper<Scalars['Int']['output']>;
-  readonly defense: FieldWrapper<Scalars['Int']['output']>;
+  readonly attackDamage?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
+  readonly defense?: Maybe<FieldWrapper<Scalars['Int']['output']>>;
   readonly effect?: Maybe<FieldWrapper<Scalars['String']['output']>>;
   readonly type?: Maybe<FieldWrapper<Scalars['String']['output']>>;
 };

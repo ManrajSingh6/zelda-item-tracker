@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 interface EquipmentPropertyApiResponse {
-  readonly attack: number
-  readonly defense: number
+  readonly attack: number | null
+  readonly defense: number | null
   readonly effect: string
-  readonly type: string
+  readonly type: string | null
 }
 
 export interface EquipmentApiResponse {

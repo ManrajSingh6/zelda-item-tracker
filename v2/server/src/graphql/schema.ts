@@ -32,8 +32,8 @@ export const schema = gql`
   }
 
   type EquipmentProperty {
-    attackDamage: Int!
-    defense: Int!
+    attackDamage: Int
+    defense: Int
     effect: String # Only for TOTK
     type: String # Only for TOTK
   }
