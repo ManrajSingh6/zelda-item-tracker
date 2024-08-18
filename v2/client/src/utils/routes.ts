@@ -1,0 +1,5 @@
+export const MONSTERS_ROUTE = '/monsters'
+export const EQUIPMENT_ROUTE = '/equipment'
+export const MATERIALS_ROUTE = '/materials'
+export const CREATURES_ROUTE = '/creatures'
+export const TREASURE_ROUTE = '/treasure'
