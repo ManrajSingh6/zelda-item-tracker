@@ -30,6 +30,8 @@ export function createQueryResolvers({
   fetcher,
   compendiumApiBaseUrl,
 }: QueryResolverOpts): QueryResolvers {
+  const formattedCategoryEndpoint = `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${CATEGORY_ENDPOINT}`
+
   async function monsters(
     _parent: unknown,
     _args: unknown,
@@ -37,23 +39,19 @@ export function createQueryResolvers({
   ): Promise<readonly Monster[] | GraphQLError> {
     try {
       const response: QueryCategoryApiResponse<MonsterApiResponse> = (
-        await fetcher.get(
-          `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${CATEGORY_ENDPOINT}/monsters`,
-        )
+        await fetcher.get(`${formattedCategoryEndpoint}/monsters`)
       ).body
 
-      return response.data.map((apiMonster) => {
-        return {
-          id: apiMonster.id,
-          name: apiMonster.name,
-          category: 'Monsters',
-          description: apiMonster.description,
-          image: apiMonster.image,
-          commonLocations: apiMonster.common_locations ?? [],
-          drops: apiMonster.drops ?? [],
-          isDlc: apiMonster.dlc,
-        }
-      })
+      return response.data.map((apiMonster) => ({
+        id: apiMonster.id,
+        name: apiMonster.name,
+        category: 'Monsters',
+        description: apiMonster.description,
+        image: apiMonster.image,
+        commonLocations: apiMonster.common_locations ?? [],
+        drops: apiMonster.drops ?? [],
+        isDlc: apiMonster.dlc,
+      }))
     } catch (error) {
       console.error(`Error fetching monsters, error=${JSON.stringify(error)}`)
       return new GraphQLError('Error fetching monsters.')
@@ -67,31 +65,27 @@ export function createQueryResolvers({
   ): Promise<readonly Equipment[] | GraphQLError> {
     try {
       const response: QueryCategoryApiResponse<EquipmentApiResponse> = (
-        await fetcher.get(
-          `${compendiumApiBaseUrl}/${HYRULE_API_VERSION}/${CATEGORY_ENDPOINT}/equipment`,
-        )
+        await fetcher.get(`${formattedCategoryEndpoint}/equipment`)
       ).body
 
-      return response.data.map((apiEquipment) => {
-        return {
-          id: apiEquipment.id,
-          name: apiEquipment.name,
-          category: 'Equipment',
-          description: apiEquipment.description,
-          image: apiEquipment.image,
-          commonLocations: apiEquipment.common_locations ?? [],
-          properties: {
-            attackDamage: apiEquipment.properties.attack,
-            defense: apiEquipment.properties.defense,
-            effect:
-              apiEquipment.properties.effect !== ''
-                ? apiEquipment.properties.effect
-                : null,
-            type: apiEquipment.properties.type,
-          },
-          isDlc: apiEquipment.dlc,
-        }
-      })
+      return response.data.map((apiEquipment) => ({
+        id: apiEquipment.id,
+        name: apiEquipment.name,
+        category: 'Equipment',
+        description: apiEquipment.description,
+        image: apiEquipment.image,
+        commonLocations: apiEquipment.common_locations ?? [],
+        properties: {
+          attackDamage: apiEquipment.properties.attack,
+          defense: apiEquipment.properties.defense,
+          effect:
+            apiEquipment.properties.effect !== ''
+              ? apiEquipment.properties.effect
+              : null,
+          type: apiEquipment.properties.type,
+        },
+        isDlc: apiEquipment.dlc,
+      }))
     } catch (error) {
       console.error(`Error fetching equipment, error=${JSON.stringify(error)}`)
       return new GraphQLError('Error fetching equipment.')
