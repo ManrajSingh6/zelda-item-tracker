@@ -1,12 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import { BaseCategoryFieldsApiResponse } from './categoryTypes'
 
-export interface MonsterApiResponse {
-  readonly id: number
-  readonly name: string
-  readonly category: string
-  readonly description: string
-  readonly image: string
-  readonly common_locations: readonly string[] | null
+export interface MonsterApiResponse extends BaseCategoryFieldsApiResponse {
   readonly drops: readonly string[] | null
-  readonly dlc: boolean
 }
