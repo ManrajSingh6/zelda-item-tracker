@@ -6,7 +6,7 @@ import App from './App.tsx'
 import './index.css'
 
 const apolloClient = new ApolloClient({
-  uri: import.meta.env.GRAPHQL_SERVER_URL ?? '',
+  uri: import.meta.env.VITE_GRAPHQL_API_SERVER_URL ?? '',
   cache: new InMemoryCache()
 })
 
