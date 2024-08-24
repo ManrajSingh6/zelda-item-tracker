@@ -37,7 +37,7 @@ export function Navbar(): JSX.Element {
   const { pathname } = useLocation()
 
   return (
-    <div className='py-4 flex justify-between'>
+    <div className='py-4 flex justify-between border-b-2 border-accentIndigo '>
       <div className='flex items-center gap-2'>
         <Icon
           icon={<GiSwordWound />}
