@@ -1,5 +1,8 @@
 schema:
   - ./src/graphql/schema.graphql
+documents:
+  - './src/graphql/queries/**/**.ts'
+  - './src/graphql/mutations/**/**.ts'
 generates:
   ./src/graphql/gen/gen-types.d.ts:
     plugins:
