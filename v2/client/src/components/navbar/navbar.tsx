@@ -51,6 +51,7 @@ export function Navbar(): JSX.Element {
         {NAVBAR_ITEMS.map(({ text, route }) => {
           return (
             <NavbarItem
+              key={`nav-item-${text}`}
               text={text}
               route={route}
               isActiveRoute={pathname === route}
