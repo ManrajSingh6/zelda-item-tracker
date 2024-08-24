@@ -14,7 +14,9 @@ export default {
         ancientStone: '#B5A897',
         primaryBlue: '#0ea5e9',
         darkGray: '#1e293b',
+        heading: '#0f172a',
         lightGray: '#f1f5f9',
+        accent: '#334151',
         white: '#ffffff',
         accentIndigo: '#6366f1',
         hoverTeal: '#14b8a6'
