@@ -133,3 +133,24 @@ export type Treasure = {
   readonly isDlc: FieldWrapper<Scalars['Boolean']['output']>
   readonly name: FieldWrapper<Scalars['String']['output']>
 }
+
+export type MonsterFragment = {
+  readonly __typename?: 'Monster'
+  readonly id: number
+  readonly name: string
+  readonly description: string
+  readonly category: Category
+  readonly commonLocations: ReadonlyArray<string>
+  readonly drops: ReadonlyArray<string>
+  readonly image: string
+  readonly isDlc: boolean
+}
+
+export type MonstersQueryVariables = Exact<{ [key: string]: never }>
+
+export type MonstersQuery = {
+  readonly __typename?: 'Query'
+  readonly monsters: ReadonlyArray<
+    { readonly __typename?: 'Monster' } & MonsterFragment
+  >
+}
