@@ -37,13 +37,13 @@ export function Navbar(): JSX.Element {
   const { pathname } = useLocation()
 
   return (
-    <div className='py-4 flex justify-between border-b-2 border-accentIndigo '>
+    <div className='flex justify-between border-b-2 border-accentIndigo py-4'>
       <div className='flex items-center gap-2'>
         <Icon
           icon={<GiSwordWound />}
           styles={{ color: '#6366f1', width: '2rem' }}
         />
-        <h1 className='text-xl text-darkGray font-semibold'>
+        <h1 className='text-xl font-semibold text-darkGray'>
           Zelda Item Tracker
         </h1>
       </div>

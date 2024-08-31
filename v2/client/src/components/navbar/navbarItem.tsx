@@ -14,7 +14,7 @@ export function NavbarItem({
   return (
     <Link to={route}>
       <p
-        className={`text-sm font-semibold hover:text-accentIndigo transition-colors duration-200 ease-in-out ${
+        className={`text-sm font-semibold transition-colors duration-200 ease-in-out hover:text-accentIndigo ${
           isActiveRoute ? 'text-accentIndigo' : 'text-darkGray'
         }`}
       >
