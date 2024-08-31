@@ -5,7 +5,7 @@ import {
   MonstersQuery,
   MonstersQueryVariables
 } from '../../graphql/gen/gen-types'
-import { ALL_MONSTERS_QUERY } from '../../graphql/queries/monstersQueries'
+import { ALL_MONSTERS_QUERY } from '../../graphql/queries/itemQueries'
 
 interface UseFetchMonstersReturn {
   readonly monsters: readonly MonsterFragment[]
