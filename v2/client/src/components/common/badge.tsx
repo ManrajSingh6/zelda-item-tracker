@@ -1,11 +1,53 @@
-interface BadgeProps {
-  readonly text: string
+interface BadgeContainerProps {
+  readonly badges: readonly string[]
+  readonly header?: string
+  readonly badgeStyle?: {
+    readonly backgroundColor: string
+    readonly textColor: string
+  }
 }
 
-export function Badge({ text }: BadgeProps): JSX.Element {
+interface BadgeProps {
+  readonly text: string
+  readonly badgeStyle?: {
+    readonly backgroundColor: string
+    readonly textColor: string
+  }
+}
+
+function Badge({ text, badgeStyle }: BadgeProps): JSX.Element {
   return (
-    <span className='me-2 rounded-lg bg-accentIndigo px-2.5 py-0.5 text-[10px] font-light text-white'>
+    <span
+      className='me-2 rounded-lg px-2.5 py-0.5 text-[10px] font-light capitalize'
+      style={{
+        backgroundColor: badgeStyle?.backgroundColor,
+        color: badgeStyle?.textColor
+      }}
+    >
       {text}
     </span>
+  )
+}
+
+export function BadgeContainer({
+  badges,
+  header,
+  badgeStyle
+}: BadgeContainerProps): JSX.Element {
+  return (
+    <div>
+      <span className='text-xs font-semibold'>{header}</span>
+      <div className='flex'>
+        {badges.map((badge, idx) => {
+          return (
+            <Badge
+              key={`badge-item-${badge}-${idx}`}
+              text={badge}
+              badgeStyle={badgeStyle}
+            />
+          )
+        })}
+      </div>
+    </div>
   )
 }
