@@ -156,3 +156,32 @@ export type MonstersQuery = {
     { readonly __typename?: 'Monster' } & MonsterFragment
   >
 }
+
+export type EquipmentPropertiesFragment = {
+  readonly __typename?: 'EquipmentProperty'
+  readonly attackDamage: Maybe<number>
+  readonly defense: Maybe<number>
+}
+
+export type EquipmentFragment = {
+  readonly __typename?: 'Equipment'
+  readonly id: number
+  readonly name: string
+  readonly description: string
+  readonly category: Category
+  readonly commonLocations: ReadonlyArray<string>
+  readonly image: string
+  readonly isDlc: boolean
+  readonly properties: {
+    readonly __typename?: 'EquipmentProperty'
+  } & EquipmentPropertiesFragment
+}
+
+export type EquipmentQueryVariables = Exact<{ [key: string]: never }>
+
+export type EquipmentQuery = {
+  readonly __typename?: 'Query'
+  readonly equipment: ReadonlyArray<
+    { readonly __typename?: 'Equipment' } & EquipmentFragment
+  >
+}
