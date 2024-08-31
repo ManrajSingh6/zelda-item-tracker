@@ -8,6 +8,7 @@ import {
 } from './utils/routes'
 import { MonstersPage } from './pages/MonstersPage'
 import { Layout } from './pages/layout'
+import { EquipmentPage } from './pages/EquipmentPage'
 
 function App(): JSX.Element {
   return (
@@ -15,7 +16,7 @@ function App(): JSX.Element {
       <Route path='/' element={<Navigate to={MONSTERS_ROUTE} />} />
       <Route path='/' element={<Layout />}>
         <Route path={MONSTERS_ROUTE} element={<MonstersPage />} />
-        <Route path={EQUIPMENT_ROUTE} element={<p>Equipment Page</p>} />
+        <Route path={EQUIPMENT_ROUTE} element={<EquipmentPage />} />
         <Route path={MATERIALS_ROUTE} element={<p>Materials Page</p>} />
         <Route path={CREATURES_ROUTE} element={<p>Creatures Page</p>} />
         <Route path={TREASURE_ROUTE} element={<p>Treasure Page</p>} />
