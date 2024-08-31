@@ -18,7 +18,7 @@ interface BadgeProps {
 function Badge({ text, badgeStyle }: BadgeProps): JSX.Element {
   return (
     <span
-      className='me-2 rounded-lg px-2.5 py-0.5 text-[10px] font-light capitalize'
+      className='rounded-lg px-2.5 py-0.5 text-[10px] font-light capitalize'
       style={{
         backgroundColor: badgeStyle?.backgroundColor,
         color: badgeStyle?.textColor
@@ -37,7 +37,7 @@ export function BadgeContainer({
   return (
     <div>
       <span className='text-xs font-semibold'>{header}</span>
-      <div className='flex'>
+      <div className='flex flex-wrap gap-1'>
         {badges.map((badge, idx) => {
           return (
             <Badge
