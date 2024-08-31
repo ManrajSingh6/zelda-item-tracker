@@ -5,8 +5,8 @@ import { NavbarContainer } from '../components/navbar/navbarContainer'
 
 export function Layout(): JSX.Element {
   return (
-    <div className='flex justify-center min-h-screen'>
-      <div className='max-w-screen-2xl w-full md:w-11/12 sm:w-95/100'>
+    <div className='flex min-h-screen justify-center'>
+      <div className='sm:w-95/100 w-full max-w-screen-2xl md:w-11/12'>
         <NavbarContainer>
           <Navbar />
         </NavbarContainer>
