@@ -1,4 +1,4 @@
-import { MonsterCard } from '../components/cards/monsterCard'
+import { ItemCard } from '../components/cards/itemCard'
 import { Grid } from '../components/common/grid'
 import { PageHeader } from '../components/common/pageHeader'
 import { useFetchMonsters } from '../hooks/queries/useFetchMonsters'
@@ -7,7 +7,23 @@ export function MonstersPage(): JSX.Element {
   const { monsters, loading } = useFetchMonsters()
 
   const cardElements = monsters.map((mon) => {
-    return <MonsterCard key={`card-item-${mon.id}`} monster={mon} />
+    return (
+      <ItemCard
+        key={`card-item-${mon.id}`}
+        baseDetails={{
+          id: mon.id,
+          name: mon.name,
+          category: mon.category,
+          description: mon.description,
+          image: mon.image,
+          commonLocations: mon.commonLocations,
+          isDlc: mon.isDlc
+        }}
+        extraDetails={{
+          drops: mon.drops
+        }}
+      />
+    )
   })
 
   return (
