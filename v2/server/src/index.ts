@@ -17,7 +17,7 @@ async function startServer(): Promise<void> {
   })
 
   const { url } = await startStandaloneServer(server, {
-    listen: { port: parseInt(process.env.SERVER_PORT || '') },
+    listen: { port: parseInt(process.env.PORT || '') },
   })
 
   console.log(`🛡️  Server ready at: ${url}`)
