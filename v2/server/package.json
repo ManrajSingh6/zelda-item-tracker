@@ -5,16 +5,15 @@
   "private": true,
   "main": "./build/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "rimraf ./build && tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
-    "dev": "tsx watch src/index.ts",
-    "start": "node ./build/index.js",
+    "dev": "npx nodemon",
+    "start": "npm run build && node ./build/index.js",
     "prettier": "prettier --write src/",
     "lint": "eslint . --ext .ts,.tsx",
     "generate": "graphql-codegen"
   },
   "author": "Manraj Singh",
-  "type": "module",
   "dependencies": {
     "@apollo/server": "^4.11.0",
     "dotenv": "^16.4.5",
@@ -25,6 +24,7 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@graphql-codegen/cli": "^5.0.2",
+    "@types/node": "^22.5.2",
     "@types/superagent": "^8.1.8",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
@@ -34,7 +34,10 @@
     "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
     "prettier": "~3.2.5",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
     "tsx": "^4.17.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.1.0"
