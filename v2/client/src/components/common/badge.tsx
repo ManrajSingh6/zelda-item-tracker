@@ -36,7 +36,7 @@ export function BadgeContainer({
 }: BadgeContainerProps): JSX.Element {
   return (
     <div>
-      <span className='text-xs font-semibold'>{header}</span>
+      <span className='text-xs font-semibold text-accent'>{header}</span>
       <div className='flex flex-wrap gap-1'>
         {badges.map((badge, idx) => {
           return (

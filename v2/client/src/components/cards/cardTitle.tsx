@@ -8,7 +8,7 @@ interface CardTitleProps {
 export function CardTitle({ title, isDlc }: CardTitleProps): JSX.Element {
   return (
     <div className='flex justify-between'>
-      <p className='text-sm font-semibold capitalize'>{title}</p>
+      <p className='text-sm font-semibold capitalize text-accent'>{title}</p>
       {isDlc && (
         <BadgeContainer
           badges={['DLC']}
