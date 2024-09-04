@@ -9,15 +9,9 @@ export function MonstersPage(): JSX.Element {
   const cardElements = monsters.map((mon) => {
     return (
       <ItemCard
-        key={`card-item-${mon.id}`}
+        key={`mon-card-item-${mon.id}`}
         baseDetails={{
-          id: mon.id,
-          name: mon.name,
-          category: mon.category,
-          description: mon.description,
-          image: mon.image,
-          commonLocations: mon.commonLocations,
-          isDlc: mon.isDlc
+          ...mon
         }}
         extraDetails={{
           drops: mon.drops
