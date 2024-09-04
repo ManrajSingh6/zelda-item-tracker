@@ -16,6 +16,10 @@ export interface ItemCardProps {
   }
   readonly extraDetails?: {
     readonly drops?: readonly string[]
+    readonly equipmentProperties?: {
+      readonly attackDamage: number | undefined
+      readonly defense: number | undefined
+    }
   }
 }
 
@@ -26,7 +30,9 @@ export function ItemCard({
   const [showFace, setShowFace] = useState(true)
 
   const { id, name, description, image, commonLocations, isDlc } = baseDetails
-  const { drops } = extraDetails ?? {}
+
+  // TODO: display equipment properties in card
+  const { drops, equipmentProperties } = extraDetails ?? {}
 
   return (
     <div
@@ -34,7 +40,7 @@ export function ItemCard({
       className={`flex cursor-pointer flex-col ${showFace ? 'gap-4' : 'gap-2'} rounded-xl border border-accent border-opacity-15 p-4 transition-opacity duration-300 ease-in-out`}
     >
       {showFace ? (
-        <CardFace id={id} imageSrc={image} title={name} />
+        <CardFace id={id} imageSrc={image} title={name} isDlc={isDlc} />
       ) : (
         <>
           <CardTitle title={name} isDlc={isDlc} />
