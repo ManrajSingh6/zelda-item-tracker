@@ -3,6 +3,7 @@ import { CardFace } from './cardFace'
 import { BadgeContainer } from '../common/badge'
 import { CardDescription } from './cardDescription'
 import { CardTitle } from './cardTitle'
+import { EquipmentRating } from './equipmentRating'
 
 export interface ItemCardProps {
   readonly baseDetails: {
@@ -31,13 +32,12 @@ export function ItemCard({
 
   const { id, name, description, image, commonLocations, isDlc } = baseDetails
 
-  // TODO: display equipment properties in card
   const { drops, equipmentProperties } = extraDetails ?? {}
 
   return (
     <div
       onClick={() => setShowFace((prev) => !prev)}
-      className={`flex cursor-pointer flex-col ${showFace ? 'gap-4' : 'gap-2'} rounded-xl border border-accent border-opacity-15 p-4 transition-opacity duration-300 ease-in-out`}
+      className={`flex cursor-pointer flex-col ${showFace ? 'gap-4' : 'gap-3'} rounded-xl border border-accent border-opacity-15 p-4 transition-opacity duration-300 ease-in-out`}
     >
       {showFace ? (
         <CardFace id={id} imageSrc={image} title={name} isDlc={isDlc} />
@@ -61,6 +61,12 @@ export function ItemCard({
                 backgroundColor: '#065F46',
                 textColor: '#D1FAE5'
               }}
+            />
+          ) : undefined}
+          {equipmentProperties ? (
+            <EquipmentRating
+              attackRating={equipmentProperties.attackDamage}
+              defenseRating={equipmentProperties.defense}
             />
           ) : undefined}
         </>
