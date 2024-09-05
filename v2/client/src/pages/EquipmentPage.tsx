@@ -4,16 +4,19 @@ import { Grid } from '../components/common/grid'
 import { PageHeader } from '../components/common/pageHeader'
 import { TextInput } from '../components/common/searchInput'
 import { useFetchEquipment } from '../hooks/queries/useFetchEquipment'
+import { useDebounce } from '../hooks/useDebounce'
 
 export function EquipmentPage(): JSX.Element {
   const { equipment, loading } = useFetchEquipment()
 
-  // TODO: create a debounce hook for this searching/any callback fn passed into the hook
   const [searchTerm, setSearchTerm] = useState('')
+  const { debouncedValue: debouncedSearchTerm } = useDebounce({
+    value: searchTerm
+  })
 
   const cardElements = equipment
     .filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      item.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
     )
     .map((equip) => {
       return (
