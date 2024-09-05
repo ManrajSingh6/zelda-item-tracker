@@ -21,14 +21,12 @@ export function MonstersPage(): JSX.Element {
   })
 
   return (
-    <div className='mt-4'>
+    <div className='mt-4 flex flex-col gap-4'>
       <PageHeader
         header='Monsters'
         subText="Fierce and varied enemies roam Hyrule and test Link's combat prowess and survival skills, turning every battle into a thrilling challenge in his epic quest."
       />
-      <div className='mt-4'>
-        <Grid elementsLoading={loading} elements={cardElements} />
-      </div>
+      <Grid elementsLoading={loading} elements={cardElements} />
     </div>
   )
 }
