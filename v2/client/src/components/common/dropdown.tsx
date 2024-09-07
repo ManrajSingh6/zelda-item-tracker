@@ -3,7 +3,7 @@ import Select from 'react-select'
 export interface DropdownOption {
   readonly label: string
   readonly value: string | number
-  readonly disabled?: boolean
+  readonly isDisabled?: boolean
 }
 
 interface DropdownProps {
