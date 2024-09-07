@@ -48,12 +48,6 @@ export function EquipmentPage(): JSX.Element {
     )
   })
 
-  function handleDropdownChange(option: DropdownOption | null): void {
-    if (option) {
-      setDropdownDisplayCount(option)
-    }
-  }
-
   function getDefaultDropdownOption(): DropdownOption {
     return {
       label: 'All',
@@ -78,7 +72,9 @@ export function EquipmentPage(): JSX.Element {
           selectedOption={dropdownDisplayCount}
           defaultOption={getDefaultDropdownOption()}
           options={DEFAULT_DROPDOWN_OPTS}
-          onSelect={handleDropdownChange}
+          onSelect={(opt) => {
+            opt && setDropdownDisplayCount(opt)
+          }}
         />
       </div>
       <Grid elementsLoading={loading} elements={cardElements} />
