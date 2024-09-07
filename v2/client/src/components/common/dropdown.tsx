@@ -55,7 +55,8 @@ export function Dropdown({
               : state.isFocused
                 ? '#c9cbff'
                 : '#FFFFFF',
-            color: state.isSelected ? '#FFFFFF' : '#334151'
+            color: state.isSelected ? '#FFFFFF' : '#334151',
+            cursor: state.isDisabled ? 'not-allowed' : 'pointer'
           })
         }}
       />
