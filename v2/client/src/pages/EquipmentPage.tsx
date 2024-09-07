@@ -6,8 +6,8 @@ import { TextInput } from '../components/common/searchInput'
 import { useFetchEquipment } from '../hooks/queries/useFetchEquipment'
 import { useDebounce } from '../hooks/useDebounce'
 import { Dropdown, DropdownOption } from '../components/common/dropdown'
-import { ZERO } from '../utils/constants'
 import { DEFAULT_DROPDOWN_OPTS, NO_DROPDOWN_ITEMS } from '../utils/defaults'
+import { sliceAndFilterCards } from '../utils/filters'
 
 export function EquipmentPage(): JSX.Element {
   const { equipment, loading } = useFetchEquipment()
@@ -21,28 +21,32 @@ export function EquipmentPage(): JSX.Element {
     value: searchTerm
   })
 
-  const cardElements = equipment
-    // Can assert type because dropdown values in this context are numbers
-    .slice(ZERO, dropdownDisplayCount.value as number)
-    .filter((item) =>
-      item.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+  // Can assert type because dropdown values in this context are numbers
+  const slicedFilteredEquipment = sliceAndFilterCards(
+    equipment,
+    dropdownDisplayCount.value as number,
+    debouncedSearchTerm
+  )
+
+  const cardElements = slicedFilteredEquipment.map((equip) => {
+    const equipPropertiesExist = 'properties' in equip
+    return (
+      <ItemCard
+        key={`equip-card-item-${equip.id}`}
+        baseDetails={{
+          ...equip
+        }}
+        extraDetails={{
+          equipmentProperties: equipPropertiesExist
+            ? {
+                attackDamage: equip.properties.attackDamage ?? undefined,
+                defense: equip.properties.defense ?? undefined
+              }
+            : undefined
+        }}
+      />
     )
-    .map((equip) => {
-      return (
-        <ItemCard
-          key={`equip-card-item-${equip.id}`}
-          baseDetails={{
-            ...equip
-          }}
-          extraDetails={{
-            equipmentProperties: {
-              attackDamage: equip.properties.attackDamage ?? undefined,
-              defense: equip.properties.defense ?? undefined
-            }
-          }}
-        />
-      )
-    })
+  })
 
   function handleDropdownChange(option: DropdownOption | null): void {
     if (option) {
