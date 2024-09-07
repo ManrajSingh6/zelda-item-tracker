@@ -38,6 +38,26 @@ export function Dropdown({
         value={selectedOption}
         options={defaultOption ? [defaultOption].concat(options) : options}
         placeholder={placeholder}
+        styles={{
+          control: (baseStyles, state) => ({
+            ...baseStyles,
+            minWidth: '100px',
+            backgroundColor: '#f9fafb',
+            width: 'fit-content',
+            cursor: state.isDisabled ? 'not-allowed' : 'pointer',
+            boxShadow: 'none'
+          }),
+          option: (baseStyles, state) => ({
+            ...baseStyles,
+            textDecoration: state.isDisabled ? 'line-through' : 'none',
+            backgroundColor: state.isSelected
+              ? '#6366f1'
+              : state.isFocused
+                ? '#c9cbff'
+                : '#FFFFFF',
+            color: state.isSelected ? '#FFFFFF' : '#334151'
+          })
+        }}
       />
     </div>
   )
