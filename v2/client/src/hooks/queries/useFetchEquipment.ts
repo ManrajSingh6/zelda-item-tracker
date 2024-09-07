@@ -19,7 +19,9 @@ export function useFetchEquipment(): UseFetchEquipmentReturn {
   const { data, loading, error } = useQuery<
     EquipmentQuery,
     EquipmentQueryVariables
-  >(ALL_EQUIPMENT_QUERY)
+  >(ALL_EQUIPMENT_QUERY, {
+    fetchPolicy: 'network-only'
+  })
 
   useEffect(() => {
     // Only update data if it exists, otherwise keep the last success state

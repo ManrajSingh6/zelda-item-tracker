@@ -19,7 +19,9 @@ export function useFetchMonsters(): UseFetchMonstersReturn {
   const { data, loading, error } = useQuery<
     MonstersQuery,
     MonstersQueryVariables
-  >(ALL_MONSTERS_QUERY)
+  >(ALL_MONSTERS_QUERY, {
+    fetchPolicy: 'network-only'
+  })
 
   useEffect(() => {
     // Only update data if it exists, otherwise keep the last success state
