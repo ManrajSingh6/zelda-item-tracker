@@ -19,7 +19,7 @@ export function TextInput({
   }
 
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='flex w-full flex-col gap-1'>
       {label && (
         <label className='text-xs font-semibold text-accent'>{label}</label>
       )}
