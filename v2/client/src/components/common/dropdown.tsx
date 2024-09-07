@@ -1,27 +1,28 @@
-type DropdownOptionValue = string | number
+import Select from 'react-select'
 
-interface DropdownOption {
+export interface DropdownOption {
   readonly label: string
-  readonly value: DropdownOptionValue
+  readonly value: string | number
   readonly disabled?: boolean
 }
 
 interface DropdownProps {
+  readonly selectedOption: DropdownOption | null
   readonly options: readonly DropdownOption[]
-  readonly onSelect: (value: DropdownOptionValue) => void
+  readonly defaultOption?: DropdownOption
+  readonly onSelect: (value: DropdownOption | null) => void
   readonly dropdownLabel?: string
   readonly placeholder?: string
 }
 
 export function Dropdown({
+  selectedOption,
   options,
+  defaultOption,
   onSelect,
-  dropdownLabel
+  dropdownLabel,
+  placeholder
 }: DropdownProps): JSX.Element {
-  function onDropdownChange(event: React.ChangeEvent<HTMLSelectElement>): void {
-    onSelect(event.target.value)
-  }
-
   return (
     <div className='flex flex-col gap-1'>
       {/* TODO: extract this into a seperate component, and use it in the search + text input as well */}
@@ -30,22 +31,14 @@ export function Dropdown({
           {dropdownLabel}
         </label>
       )}
-      <select
-        onChange={onDropdownChange}
-        className='w-full rounded-md border bg-gray-50 p-2 text-sm focus:outline-none'
-      >
-        {options.map(({ label, value, disabled }) => {
-          return (
-            <option
-              value={value}
-              className='bg-inherit text-inherit'
-              disabled={disabled}
-            >
-              {label}
-            </option>
-          )
-        })}
-      </select>
+      <Select
+        className='w-fit text-sm focus:outline-none'
+        defaultValue={defaultOption}
+        onChange={onSelect}
+        value={selectedOption}
+        options={defaultOption ? [defaultOption].concat(options) : options}
+        placeholder={placeholder}
+      />
     </div>
   )
 }
